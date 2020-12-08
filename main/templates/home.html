@@ -1,0 +1,63 @@
+{% extends "main.html" %}
+{% block head %}
+<style>
+    .posting-box {
+        display: block;
+        width: 250px;
+        height: 300px;
+
+        border: 1px solid black;
+        border-radius: 5px;
+
+        padding: 25px;
+    }
+
+</style>
+<% endblock %>
+
+
+{% block header%}
+<div class="wrap">
+    <div class="jumbotron">
+        <h1 class="display-4">오늘의 고양이</h1>
+        <p class="lead"></p>
+        <hr class="my-4">
+        <p>당신의 고양이를 자랑해주세요!</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="posting-box">
+
+    <div class="form-group">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                      placeholder="코멘트를 남겨주세요."></textarea>
+    </div>
+    <form>
+        <div class="form-group">
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" accpet="image/*">
+        </div>
+    </form>
+    <button type="submit" class="btn btn-primary" onclick="post()">저장</button>
+</div>
+
+
+{% for result in results %}
+
+<div class="card-columns">
+    <div class="card">
+        <img class="card-img-top"
+             src="{{result.filename}}">
+        <div class="card-body">
+            <div class="card-name">{{result.name }}</div>
+            <div class="card-date">{{result.created}}</div>
+            <p class="card-desc">{{result.desc}}</p>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}
