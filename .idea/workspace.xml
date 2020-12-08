@@ -31,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -73,11 +74,16 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="320" width="545" height="388" key="#Notifications" timestamp="1607401908664">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="605" y="320" width="545" height="388" key="#Notifications/0.0.1440.900@0.0.1440.900" timestamp="1607401908664" />
+    <state x="520" y="315" key="#Scopes" timestamp="1607415556848">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="520" y="315" key="#Scopes/0.0.1440.900@0.0.1440.900" timestamp="1607415556848" />
   </component>
 </project>
