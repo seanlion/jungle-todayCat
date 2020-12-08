@@ -12,12 +12,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 <body>
-     <div class="container m-5">
-        {% include "menu.html" %}
+    <div class="container m-5">
         {% block header%} {% endblock %}
         {% block content %}
         {% endblock %}
     </div>
+
     <div class="footer">
         {% block footer %}
             <p>&copy; Copyright 2020 by Jungle Team 6</p>

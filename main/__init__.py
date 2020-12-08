@@ -1,8 +1,8 @@
-from flask import Flask,render_template,jsonify,request
+from flask import Flask,render_template
 from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('signup.html')

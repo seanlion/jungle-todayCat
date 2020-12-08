@@ -1,0 +1,74 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <form>
+        <div class="mb-3">
+            <label for="emailText" class="form-label">이메일 주소를 입력하세요.</label>
+            <input type="email" class="form-control" id="emailText" placeholder="name@example.com">
+        </div>
+        <div class="mb-3 row">
+            <label for="password1" class="col-sm-2 col-form-label">패스워드를 입력하세요.</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password1">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password2" class="col-sm-2 col-form-label">패스워드를 다시 한번 입력하세요.</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password2">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nameTextarea" class="form-label">이름을 적어주세요.</label>
+            <textarea class="form-control" id="nameTextarea" rows="1"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="compareId()">가입하기</button>
+    </form>
+{% endblock %}
+<script>
+    function compareId(){
+
+        $.ajax({
+            type: "GET",
+            url: "/signup",
+            data: {},
+            success: function(response){
+                if(response["result"] == "success"){
+                    const userList = response["list"]
+                    const newId = $("#emailText").val()
+                    for(let i=0; i<userList.length; i++){
+                        if(newId == userList[i]["email"]){
+                            alert("중복되는 이메일입니다.")
+                            return false
+                        }
+                    }
+                }
+            }
+        })
+        if($("#password1") != $("#password2")){
+            alert("비밀번호가 일치하지 않습니다.")
+            return false;
+        }
+        register()
+    }
+    function register(){
+        const newEmail = $("#emailText").val()
+        const newPassword = $("#password1").val()
+        const newName = $("#nameTextarea").val()
+        $.ajax({
+            type: "POST",
+            url: "/signup",
+            data: {
+                email_give: newEmail,
+                password_give: newPassword,
+                name_give: newName
+            },
+            success: function(response){
+                if(response["result"]=="success"){
+                    alert("가입 완료!")
+                    location.replace("/login")
+                }
+            }
+        })
+    }
+</script>
