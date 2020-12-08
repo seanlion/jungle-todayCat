@@ -1,0 +1,27 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  padding : 15px;
+  }
+
+p {
+    margin-bottom : 0;
+}
+
+.card {
+    display : flex;
+    align-item : center;
+}
+
+.card-text{
+    margin : 10px;
+}
+
+control-file{
+    text-align : center;
+}
