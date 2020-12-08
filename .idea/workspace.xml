@@ -19,12 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="08f064d6-b3f6-478d-b604-692f54f7e625" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="6214cd96-4426-4383-b20b-4438a41e94fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
+    </list>
+>>>>>>> 1d283e71c88dbfa6a23acc42dca1957f37ab899f
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
     <envs>
       <env key="FLASK_APP" value="app" />
@@ -34,18 +41,31 @@
       <map>
         <entry key="FLASK_APP" value="app" />
       </map>
+=======
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+>>>>>>> 1d283e71c88dbfa6a23acc42dca1957f37ab899f
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="JupyterTrust" id="888c2082-1b2e-44a1-8974-e862cde1a2a7" />
   <component name="ProjectId" id="1lMWTEbgKxSZ2Ouq4CELDMf1EgW" />
+=======
+  <component name="ProjectId" id="1lMECm7K6LXCzgLhtGkNZmouSRp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> 1d283e71c88dbfa6a23acc42dca1957f37ab899f
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -67,6 +87,27 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+=======
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6214cd96-4426-4383-b20b-4438a41e94fc" name="Default Changelist" comment="" />
+      <created>1607398435037</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607398435037</updated>
+    </task>
+    <servers />
+  </component>
+>>>>>>> 1d283e71c88dbfa6a23acc42dca1957f37ab899f
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -79,6 +120,7 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="254" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607407532632">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -114,5 +156,11 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/week00$app.coverage" NAME="app Coverage Results" MODIFIED="1607408620927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+=======
+    <state x="605" y="320" width="545" height="388" key="#Notifications" timestamp="1607401908664">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="605" y="320" width="545" height="388" key="#Notifications/0.0.1440.900@0.0.1440.900" timestamp="1607401908664" />
+>>>>>>> 1d283e71c88dbfa6a23acc42dca1957f37ab899f
   </component>
 </project>
