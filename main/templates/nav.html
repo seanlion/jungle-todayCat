@@ -1,17 +1,18 @@
 <div class="topnav">
-  <a href="/">Home</a>
-  {% if session.get('id') is not none %}
+    <a href="/">Home</a>
+    {% if session.get('id') is not none %}
     <!-- logout view function을 만들어야 함. -->
-      <a class="login" href="{{url_for('logout')}}">로그아웃</a>
-  {% else %}
-     <!-- 로그인 페이지에서는 로그인 url이 안보여도 됨. -->
-      {% if request.url_rule.endpoint == 'login' %}
+        <a class="login" href="{{url_for('logout')}}">로그아웃</a>
+        <span>{{session.get('name')}} 님</span>
+    {% else %}
+    <!-- 로그인 페이지에서는 로그인 url이 안보여도 됨. -->
+        {% if request.url_rule.endpoint == 'login' %}
         <a class="login" href="{{url_for('register')}}">회원가입</a>
-      {% else %}
+        {% else %}
         <a class="login" href="{{url_for('login')}}">로그인</a>
-      {% endif %}
-  {% endif %}
-  <a href={{url_for('mypage')}}>Mypage</a>
+        {% endif %}
+    {% endif %}
+    <a href={{url_for('mypage')}}>Mypage</a>
 </div>
 
 

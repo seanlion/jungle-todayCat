@@ -123,5 +123,5 @@ def check_filename(filename):
 def format_datetime(ts):
     now_timestamp = time.time()
     offset = datetime.fromtimestamp(now_timestamp) - datetime.utcfromtimestamp(now_timestamp)
-    ts = datetime.fromtimestamp((int(ts) / 1000)) + offset
+    ts = datetime.fromtimestamp(int(ts)/1000) + offset
     return ts.strftime('%Y-%m-%d')

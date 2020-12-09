@@ -1,18 +1,20 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <form action="{{url_for('login')}}" method="POST">
-        <div class="mb-3">
-            <label for="loginEmail" class="form-label">이메일</label>
-            <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="name@example.com">
-        </div>
-        <div class="mb-3 row">
-            <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" name="password" id="password">
+        <form action="{{url_for('login')}}" method="POST" class="sign">
+            <div class="mb-3">
+                <label for="loginEmail" class="form-label">이메일</label>
+                <div class="col-sm-11">
+                    <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="name@example.com">
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/signup'">회원가입</button>
+            <div class="mb-3">
+                <label for="password" class="form-label">비밀번호</label>
+                <div class="col-sm-11">
+                    <input type="password" class="form-control" name="password" id="password">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-right">로그인</button>
+            <button type="button" class="btn btn-primary float-right" onclick="location.href='/signup'">회원가입</button>
     </form>
 {% endblock %}
