@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
-{% block login %}
-    <form>
+{% block content %}
+    <form action="" method="POST">
         <div class="mb-3">
             <label for="loginEmail" class="form-label">이메일</label>
             <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="name@example.com">
@@ -13,11 +13,9 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">로그인</button>
-        <button class="btn btn-primary" onclick="signup()">회원가입</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/signup'">회원가입</button>
     </form>
 {% endblock %}
 <script>
-    function signup(){
-        location.replace("../signup")
-    }
+
 </script>

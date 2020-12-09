@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <form>
+    <form action="{{url_for('register')}}" method="post" name="form">
         <div class="mb-3">
             <label for="emailText" class="form-label">이메일 입력</label>
             <input type="email" class="form-control" name="emailText" id="emailText" placeholder="name@example.com">

@@ -1,6 +1,6 @@
 <div class="topnav">
   <a class="active" href="#home">Home</a>
-  {% if session.get("id") is not none %}
+  {% if res is not none %}
     <!-- logout view function을 만들어야 함. -->
       <a class="login" href="{{url_for('login')}}">로그아웃</a>
   {% else %}
