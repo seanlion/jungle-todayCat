@@ -1,6 +1,5 @@
-
 from flask import Flask,render_template,jsonify,request,session,redirect,url_for,send_from_directory
-
+from flask_bcrypt import Bcrypt
 from flask_pymongo import PyMongo
 from datetime import datetime,timezone,timedelta
 import os,re
@@ -10,6 +9,7 @@ app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
 mongo = PyMongo(app)
 
+bcrypt = Bcrypt(app)
 
 BOARD_IMAGE_PATH = "/Users/seung/Desktop/backend/todaycat/images"
 ALLOWED_EXTENSIONS = set(['png','pdf','jpg', 'jpeg','gif'])
@@ -24,3 +24,5 @@ if not os.path.exists(app.config["BOARD_IMAGE_PATH"]):
 from . import make
 from . import main
 from . import delete
+from . import signup
+from . import login

@@ -31,6 +31,7 @@
 {% block content %}
 <script>
     function editCard(id){
+            console.log("id:",id)
             let card_src = $('#'+id).data("src");
             let card_desc = $('#'+id).data("desc");
 
@@ -40,11 +41,47 @@
                 <div class="card-body">
                      <input type="file" class="control-file" name="new_attachfile" id="new_attachfile">
                     <input type="text" class="card-text" name="new_desc" id="new_desc" value="${card_desc}">
-                    <button class="my-2 btn btn-primary btn-sm" onclick='editCardSave(${id})'>저장</button>
+                    <button class="my-2 btn btn-primary btn-sm" onclick='editCardSave("${id}")'>저장</button>
             </div>
             `
             $('#'+id).html(temp_html);
     }
+
+    function editCardSave(id){
+        let new_desc = $('#new_desc').val();
+        let new_img = $('#new_attachfile')[0].files;
+        console.log("new_img:",$('#new_attachfile')[0])
+        var form_data = new FormData();
+        if(new_img.length > 0 ){
+           form_data.append('file',new_img[0]);
+           form_data.append('desc', new_desc);
+           form_data.append('id', id);
+        }
+        console.log("desc:",form_data.get('desc'));
+        console.log("new_img:", form_data.get('id'));
+
+        $.ajax({
+            type: 'POST',
+            url : '/edit',
+            data: form_data,
+            contentType: false,
+            processData: false,
+            success : function(data){
+                if(data["result"] == "success"){
+                    alert("수정 완료");
+                    window.location.reload();
+                }
+            }
+        })
+    }
+
+    $(document).ready(function(){
+    $(".delete").on('click', function() {  // 클래스값이 delete인 엘리먼트가 눌리면?
+        if(confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림
+            location.href = $(this).data('uri');  // data-uri 속성값으로 URL 호출
+        }
+    });
+});
 </script>
 
           <div class="card" style="width: 18rem;">
@@ -57,6 +94,7 @@
               </form>
           </div>
 
+{% if results is not none %}
     <div class="card-columns">
         {% for result in results %}
             <div id="{{result._id}}" class="card" data-src="../../images/{{result.attachfile}}" data-desc='{{result.desc}}'>
@@ -67,8 +105,11 @@
                     <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
                     <p class="card-desc">{{result.desc}}</p>
                     <button onclick='editCard("{{result._id}}")' class="btn btn-primary">수정</button>
+                    <a href="#" class="delete btn btn-sm btn-outline-secondary"
+                   data-uri="{{ url_for('delete', _id = result._id) }}">삭제</a>
                 </div>
             </div>
         {% endfor %}
     </div>
+{% endif %}
 {% endblock %}

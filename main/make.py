@@ -1,11 +1,18 @@
 from main import *
 from string import digits, ascii_uppercase, ascii_lowercase
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/edit', methods=["POST"])
 def edit_content():
     desc = request.form.get("desc")
-    file = request.files["attachfile"]
+    filename = None
+    print("desc:",desc)
+    print("file_data:", request.files["new_attachfile"])
+    file = request.files["new_attachfile"]
     if file and allowed_file(file.filename):
         filename = check_filename(file.filename)
         file.save(os.path.join(app.config["BOARD_IMAGE_PATH"],filename))

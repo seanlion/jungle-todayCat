@@ -33,6 +33,7 @@
             url: "/signup",
             data: {},
             success: function(response){
+                console.log(response);
                 if(response["result"] == "success"){
                     const userList = response["list"]
                     const newId = $("#emailText").val()
