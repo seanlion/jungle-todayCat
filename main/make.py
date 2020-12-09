@@ -28,11 +28,23 @@ def edit_content():
     )
     return jsonify(data = "success")
 
-@app.route('/', methods=["GET","POST"])
+@app.route('/', methods=["POST","GET"])
 def write():
+    page = request.args.get("page", 1, type=int)
+    limit = request.args.get("limit", 5, type=int)
+    contents = mongo.db.contents
+    total_page_count = contents.find({}).count()
+    last_page_num = math.ceil(total_page_count / limit)
+    block_size = 5
+    block_num = int((page - 1) / block_size)
+    block_start = int((block_size * block_num) + 1)
+    block_last = math.ceil(block_start + (block_size - 1))
+
+    created = round(datetime.utcnow().timestamp() * 1000)
+    contents = mongo.db.contents
+
     if request.method == "POST":
         desc = request.form.get("desc")
-        created = round(datetime.utcnow().timestamp() *1000)
         filename = None
         # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
         if "attachfile" in request.files:
@@ -43,21 +55,21 @@ def write():
                 filename = check_filename(file.filename)
                 file.save(os.path.join(app.config["BOARD_IMAGE_PATH"], filename))
 
-        contents = mongo.db.contents
         post = {
             "desc": desc,
             "created": created,
             "attachfile": filename,
             "writer_id": session.get("id")
         }
-
         x = contents.insert_one(post)
-        results = list(contents.find({}))
-        return render_template('home.html',results=results)
-    else :
-        contents = mongo.db.contents
-        results = list(contents.find({}))
-        return render_template('home.html', results=results)
+        results = contents.find({})
+        return render_template('home.html',results=results,limit=limit, page=page, block_start=block_start,
+                               block_last=block_last, last_page_num=last_page_num)
+    else:
+        results = contents.find({}).skip((page - 1) * limit).limit(limit).sort("created", -1)
+        return render_template('home.html', results=results, limit=limit, page=page, block_start=block_start,
+                               block_last=block_last, last_page_num=last_page_num)
+
 
 @app.route("/images/<filename>")
 def uploaded_file(filename):
