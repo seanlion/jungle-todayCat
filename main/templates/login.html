@@ -12,9 +12,20 @@
                 <input type="password" class="form-control" name="password" id="password">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="">로그인</button>
+        <button type="submit" class="btn btn-primary" onclick="login()">로그인</button>
     </form>
 {% endblock %}
 <script>
-    function
+    function login(){
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: {email_give: $("#loginEmail"), password_give: $("#password")},
+            success: function(response){
+                if(response["result"]=="success"){
+
+                }
+            }
+        })
+    }
 </script>
