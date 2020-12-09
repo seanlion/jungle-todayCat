@@ -27,4 +27,4 @@ if not os.path.exists(app.config["BOARD_IMAGE_PATH"]):
 
 from . import make
 from . import main
-
+from . import delete

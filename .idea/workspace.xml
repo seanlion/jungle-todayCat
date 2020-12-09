@@ -28,7 +28,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="Python Script" />
       </list>
@@ -99,7 +98,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607407448147</updated>
-      <workItem from="1607407452237" duration="20664000" />
+      <workItem from="1607407452237" duration="28939000" />
     </task>
     <servers />
   </component>
@@ -116,7 +115,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="254" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607407532632">
@@ -126,7 +124,6 @@
     <state x="760" y="184" key="FileChooserDialogImpl" timestamp="1607407462600">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-<<<<<<< HEAD
     <state x="760" y="184" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1607407462600" />
     <state width="1557" height="222" key="GridCell.Tab.0.bottom" timestamp="1607408650002">
       <screen x="0" y="0" width="1600" height="860" />
@@ -155,12 +152,5 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/week00$app.coverage" NAME="app Coverage Results" MODIFIED="1607408620927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-=======
-    <state x="605" y="320" width="545" height="388" key="#Notifications/0.0.1440.900@0.0.1440.900" timestamp="1607401908664" />
-    <state x="520" y="315" key="#Scopes" timestamp="1607415556848">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="520" y="315" key="#Scopes/0.0.1440.900@0.0.1440.900" timestamp="1607415556848" />
->>>>>>> fbc5259cb089874c3a88a97602aa95ce0750b912
   </component>
 </project>
