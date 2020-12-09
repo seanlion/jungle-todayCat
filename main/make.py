@@ -1,10 +1,6 @@
 from main import *
 from string import digits, ascii_uppercase, ascii_lowercase
 
-@app.route('/index')
-def index():
-    return render_template('index.html')
-
 
 @app.route('/edit', methods=["POST"])
 def edit_content():
@@ -28,23 +24,11 @@ def edit_content():
     )
     return jsonify(data = "success")
 
-@app.route('/', methods=["POST","GET"])
+@app.route('/upload', methods=["POST","GET"])
 def write():
-    page = request.args.get("page", 1, type=int)
-    limit = request.args.get("limit", 5, type=int)
-    contents = mongo.db.contents
-    total_page_count = contents.find({}).count()
-    last_page_num = math.ceil(total_page_count / limit)
-    block_size = 5
-    block_num = int((page - 1) / block_size)
-    block_start = int((block_size * block_num) + 1)
-    block_last = math.ceil(block_start + (block_size - 1))
-
     created = round(datetime.utcnow().timestamp() * 1000)
     contents = mongo.db.contents
-
     if request.method == "POST":
-        print("url:",request.script_root)
         desc = request.form.get("desc")
         filename = None
         # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
@@ -65,12 +49,23 @@ def write():
         }
         x = contents.insert_one(post)
         mainresults = contents.find({})
-        if request.referrer == "http://0.0.0.0:5000/":
-            return render_template('home.html',mainresults=mainresults,limit=limit, page=page, block_start=block_start,
-                               block_last=block_last, last_page_num=last_page_num)
-        elif request.referrer == "http://0.0.0.0:5000/mypage":
+        if "/mypage" in request.referrer:
             return redirect(url_for('mypage'))
-    else:
+        else:
+            return redirect(url_for('index'))
+
+@app.route('/',methods=["GET"])
+def index():
+        page = request.args.get("page", 1, type=int)
+        limit = request.args.get("limit", 5, type=int)
+        contents = mongo.db.contents
+        total_page_count = contents.find({}).count()
+        last_page_num = math.ceil(total_page_count / limit)
+        block_size = 5
+        block_num = int((page - 1) / block_size)
+        block_start = int((block_size * block_num) + 1)
+        block_last = math.ceil(block_start + (block_size - 1))
+        contents = mongo.db.contents
         mainresults = contents.find({}).skip((page - 1) * limit).limit(limit).sort("created", -1)
         return render_template('home.html', mainresults=mainresults, limit=limit, page=page, block_start=block_start,
                                block_last=block_last, last_page_num=last_page_num)
