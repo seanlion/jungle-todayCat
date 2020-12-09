@@ -15,6 +15,11 @@
         <h3 class="desc-4">당신의 고양이를 자랑해주세요!
             <img src="https://twemoji.maxcdn.com/2/72x72/1f408.png" width="40px" height="40px"></h3>
 
+        <div class="random_photo">
+            <button id="pop_button" class="btn btn-primary" type="button" onclick="randomPhoto()">투데이 고양이!</button>
+            <div class="modal_spot"></div>
+        </div>
+
         <div class="card">
             <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data" onsubmit="return checkform()">
                 <input type="hidden" value="">
@@ -38,28 +43,29 @@
 {% block content %}
 <script type="text/javascript">
 
-    function randomPhoto(){
-       $.ajax({
-            type:'POST',
+    function randomPhoto() {
+        $.ajax({
+            type: 'POST',
             url: '/photos',
-            success: function(url){
-                alert("생성완료!")
-                console.log("url:",url)
-                var image = $("<img>").attr("src",url).css('max-width','900px')
-                console.log("image:",image)
+            success: function (url) {
+                console.log("url:", url)
+                var image = $("<img>").attr("src", url).css('max-width', '900px')
+                console.log("image:", image)
                 let temp_html = `
                     <div id="myModal" class="modal">
                          <div class="modal-content">
                         <span class="close">&times;</span>
-                        <p>오늘의 고양이 사진!</p>
-                        <img class="card-img-top" style="width:200px;" src="${url}">
+                        <h3>오늘, 당신의 고양이입니다!</h3>
+                        <p class="lead"></p>
+                        <h5>(=^･ω･^=)</h5>
+                        <img class="card-img-top-random" src="${url}">
                         </div>
                     </div>
                 `
                 $('.modal_spot').html(temp_html);
                 var modal = document.getElementById("myModal");
                 var close_button = document.getElementsByClassName("close")[0];
-                showModal(modal,close_button);
+                showModal(modal, close_button);
             }
 
         })
@@ -67,36 +73,29 @@
     }
 
 
-    function showModal(modal,close_button){
+    function showModal(modal, close_button) {
         modal.style.display = "block";
-        close_button.onclick = function() {
-          modal.style.display = "none";
-        }
-        window.onclick = function(event) {
-          if (event.target == modal) {
+        close_button.onclick = function () {
             modal.style.display = "none";
-          }
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     }
 
 </script>
 
-
-
-<div class="random_photo">
-        <button id="pop_button" class="btn btn-primary" type="button" onclick="randomPhoto()">투데이 고양이!</button>
-        <div class="modal_spot"></div>
-</div>
-
-
 {% if mainresults is not none %}
 <div class="card-columns">
     {% for mainresult in mainresults %}
     <div class="card-body">
-        <div id="{{mainresult._id}}" class="card" data-src="../../images/{{mainresult.attachfile}}" data-desc='{{mainresult.desc}}'>
+        <div id="{{mainresult._id}}" class="card" data-src="../../images/{{mainresult.attachfile}}"
+             data-desc='{{mainresult.desc}}'>
             <img class="card-img-top" src="../../images/{{mainresult.attachfile}}">
-            <div class="card-name" data-name="{{mainresult.name}}">{{mainresult.writer_name}}</div>
-            <div class="card-date" data-date="{{mainresult.created}}">{{mainresult.created | format_datetime}}</div>
+            <div class="card-name" data-name="{{mainresult.name}}">{{mainresult.writer_name}}의 고양이</div>
+            <div class="card-date" data-date="{{mainresult.created}}" style="font-size: 12px">{{mainresult.created | format_datetime}}</div>
             <p class="card-desc">{{mainresult.desc}}</p>
         </div>
     </div>

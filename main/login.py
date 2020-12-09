@@ -30,7 +30,7 @@ def login():
             session["id"] = email
             session["name"] = user["name"]
             print(session)
-            return redirect(url_for('write'))
+            return redirect(url_for('index'))
         else:
             flash("비밀번호가 일치하지 않습니다.")
             print("password not ok")
@@ -42,4 +42,4 @@ def login():
 def logout():
     session.clear()
     print(session)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
