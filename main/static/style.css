@@ -1,72 +1,72 @@
-   * {
-        font-family: 'Single Day', cursive;
-    }
+* {
+    font-family: 'Single Day', cursive;
+}
 
-    .filebox {
-        margin-bottom: 5px;
-        height: 100px;
-        width: 250px;
-        display: inline-block;
-        padding: .5em .75em;
-        color: #999;
+.filebox {
+    margin-bottom: 5px;
+    height: 100px;
+    width: 250px;
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
 
-        line-height: normal;
-        vertical-align: middle;
-        horiz-align: center;
-        background-color: #ffffff;
-        cursor: pointer;
-        border: 1px solid #ebebeb;
-        border-bottom-color: #e2e2e2;
-        border-radius: .25em;
-    }
+    line-height: normal;
+    vertical-align: middle;
+    horiz-align: center;
+    background-color: #ffffff;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
 
-    .card-text {
-        margin: 0px;
-        width: 250px;
-    }
+.card-text {
+    margin: 0px;
+    width: 250px;
+}
 
-    .btn {
-        font-size: 20px;
-        width: auto;
-        height: auto;
-    }
+.btn {
+    font-size: 20px;
+    width: auto;
+    height: auto;
+}
 
-    .btn.btn-outline-primary {
-        margin-top: 10px;
-    }
+.btn.btn-outline-primary {
+    margin-top: 10px;
+}
 
-    .filebox input[type="file"] { /* 파일 필드 숨기기 */
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-    }
+.filebox input[type="file"] { /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
 
-    .card-body {
-        width: auto;
-        height: auto;
-        text-align: center;
+.card-body {
+    width: auto;
+    height: auto;
+    text-align: center;
 
-    }
+}
 
-    .jumbotron{
-        padding-bottom: 10px;
-        text-align: center;
-        align-items: center;
-    }
+.jumbotron{
+    padding-bottom: 10px;
+    text-align: center;
+    align-items: center;
+}
 
-    .card{
-        display : flex;
-        align-item : center;
-        margin : 0 auto;
-        width: 300px;
-        background-color : transparent;
-        border : 0;
-    }
+.card{
+    display : flex;
+    align-item : center;
+    margin : 0 auto;
+    width: 300px;
+    background-color : transparent;
+    border : 0;
+}
 #plus {
     line-height: 5;
 }
@@ -77,15 +77,15 @@ a {
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: grey;
-  color: white;
-  text-align: center;
-  padding : 15px;
-  }
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+    color: white;
+    text-align: center;
+    padding : 15px;
+}
 
 p {
     margin-bottom : 0;
@@ -98,71 +98,92 @@ control-file{
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
-  overflow: hidden;
+    background-color: #333;
+    overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+    background-color: #ddd;
+    color: black;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #4CAF50;
-  color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 .topnav .login {
     float: right;
 }
 
+.topnav span {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
 /* random photo modal */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
 }
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sign{
+    /*border: solid 1px gray;*/
+    width: 500px;
+    /*height: 250px;*/
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 10px;
+}
+.sign button {
+    margin: 5px;
 }
