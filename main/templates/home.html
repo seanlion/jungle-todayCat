@@ -1,16 +1,78 @@
 {% extends "main.html" %}
 {% block head %}
 <style>
-    .posting-box {
-        display: block;
-        width: 250px;
-        height: 300px;
-
-        border: 1px solid black;
-        border-radius: 5px;
-
-        padding: 25px;
+    * {
+        font-family: 'Single Day', cursive;
     }
+
+    .display-4 {
+        text-align: center;
+    }
+
+    .desc-4 {
+        text-align: center;
+    }
+
+    .filebox label {
+        margin: 15px;
+        height: auto;
+        width: auto;
+        display: inline-block;
+        padding: .5em .75em;
+        color: #999;
+
+        line-height: normal;
+        vertical-align: middle;
+        horiz-align: center;
+        background-color: #fdfdfd;
+        cursor: pointer;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+    }
+
+    .card-text {
+        margin: 0px;
+        width: auto;
+    }
+
+    .btn {
+        font-size: 20px;
+        width: auto;
+        height: auto;
+    }
+
+    .btn.btn-outline-primary {
+        margin-top: 10px;
+    }
+
+    .filebox input[type="file"] { /* 파일 필드 숨기기 */
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    .card-img-top {
+        width: 286px;
+        height: auto;
+    }
+
+    .card-body {
+        width: 286px;
+        height: auto;
+        text-align: center;
+    }
+
+    .card {
+        width: 286px;
+        margin: 0px;
+    }
+
 </style>
 
 
@@ -20,54 +82,59 @@
 {% block header %}
 <div class="wrap">
     <div class="jumbotron">
-        <h1 class="display-4">오늘의 고양이</h1>
+        <h1 class="display-4">
+            <img src="https://twemoji.maxcdn.com/2/72x72/1f431.png">
+            오늘의 고양이</h1>
         <p class="lead"></p>
         <hr class="my-4">
-        <p>당신의 고양이를 자랑해주세요!</p>
+        <h3 class="desc-4">당신의 고양이를 자랑해주세요!
+            <img src="https://twemoji.maxcdn.com/2/72x72/1f408.png" width="40px" height="40px"></h3>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 <script>
-    function editCard(id){
-            console.log("id:",id)
-            let card_src = $('#'+id).data("src");
-            let card_desc = $('#'+id).data("desc");
+    function editCard(id) {
+        console.log("id:", id)
+        let card_src = $('#' + id).data("src");
+        let card_desc = $('#' + id).data("desc");
 
-            let temp_html = `
+        let temp_html = `
             <div class="card">
                 <img class="card-img-top" src="${card_src}">
                 <div class="card-body">
-                     <input type="file" class="control-file" name="new_attachfile" id="new_attachfile">
+                <div class="filebox">
+            <input type="file" class="control-file" name="new_attachfile" id="new_attachfile">
+            <label for="new_attachfile"><i class="fas fa-plus"></i></label>
                     <input type="text" class="card-text" name="new_desc" id="new_desc" value="${card_desc}">
-                    <button class="my-2 btn btn-primary btn-sm" onclick='editCardSave("${id}")'>저장</button>
+                    <button class="my-2 btn btn-outline-primary btn-sm" onclick='editCardSave("${id}")'>저장</button>
             </div>
             `
-            $('#'+id).html(temp_html);
+        $('#' + id).html(temp_html);
     }
 
-    function editCardSave(id){
+    function editCardSave(id) {
         let new_desc = $('#new_desc').val();
         let new_img = $('#new_attachfile')[0].files;
-        console.log("new_img:",$('#new_attachfile')[0])
+        console.log("new_img:", $('#new_attachfile')[0])
         var form_data = new FormData();
-        if(new_img.length > 0 ){
-           form_data.append('file',new_img[0]);
-           form_data.append('desc', new_desc);
-           form_data.append('id', id);
+        if (new_img.length > 0) {
+            form_data.append('file', new_img[0]);
+            form_data.append('desc', new_desc);
+            form_data.append('id', id);
         }
-        console.log("desc:",form_data.get('desc'));
+        console.log("desc:", form_data.get('desc'));
         console.log("new_img:", form_data.get('id'));
 
         $.ajax({
             type: 'POST',
-            url : '/edit',
+            url: '/edit',
             data: form_data,
             contentType: false,
             processData: false,
-            success : function(data){
-                if(data["result"] == "success"){
+            success: function (data) {
+                if (data["result"] == "success") {
                     alert("수정 완료");
                     window.location.reload();
                 }
@@ -75,41 +142,46 @@
         })
     }
 
-    $(document).ready(function(){
-    $(".delete").on('click', function() {  // 클래스값이 delete인 엘리먼트가 눌리면?
-        if(confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림
-            location.href = $(this).data('uri');  // data-uri 속성값으로 URL 호출
-        }
+    $(document).ready(function () {
+        $(".delete").on('click', function () {  // 클래스값이 delete인 엘리먼트가 눌리면?
+            if (confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림
+                location.href = $(this).data('uri');  // data-uri 속성값으로 URL 호출
+            }
+        });
     });
-});
 </script>
 
-          <div class="card" style="width: 18rem;">
-              <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+<div class="card" style="width: 18rem;">
+    <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+
+
+        <div class="card-body">
+            <div class="filebox">
                 <input type="file" class="control-file" name="attachfile" id="attachfile">
-                <div class="card-body">
-                    <input type="text" class="card-text" name="desc" id="desc">
-                    <button type="submit" class="btn btn-primary">업로드</button>
-                </div>
-              </form>
-          </div>
+                <label for="attachfile"><i class="fas fa-plus"></i></label>
+            </div>
+            <input type="text" class="card-text" name="desc" id="desc">
+            <button type="submit" class="btn btn-outline-primary">자랑하기</button>
+        </div>
+    </form>
+</div>
 
 {% if results is not none %}
-    <div class="card-columns">
-        {% for result in results %}
-            <div id="{{result._id}}" class="card" data-src="../../images/{{result.attachfile}}" data-desc='{{result.desc}}'>
-                <img class="card-img-top" src="../../images/{{result.attachfile}}">
-                <div class="card-body">
+<div class="card-columns">
+    {% for result in results %}
+    <div id="{{result._id}}" class="card" data-src="../../images/{{result.attachfile}}" data-desc='{{result.desc}}'>
+        <img class="card-img-top" src="../../images/{{result.attachfile}}">
+        <div class="card-body">
 
-                    <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
-                    <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
-                    <p class="card-desc">{{result.desc}}</p>
-                    <button onclick='editCard("{{result._id}}")' class="btn btn-primary">수정</button>
-                    <a href="#" class="delete btn btn-sm btn-outline-secondary"
-                   data-uri="{{ url_for('delete', _id = result._id) }}">삭제</a>
-                </div>
-            </div>
-        {% endfor %}
+            <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
+            <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
+            <p class="card-desc">{{result.desc}}</p>
+            <button onclick='editCard("{{result._id}}")' class="btn btn-outline-secondary">수정</button>
+            <a href="#" class="delete btn btn-outline-danger"
+               data-uri="{{ url_for('delete', _id = result._id) }}">삭제</a>
+        </div>
     </div>
+    {% endfor %}
+</div>
 {% endif %}
 {% endblock %}
