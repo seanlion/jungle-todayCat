@@ -89,7 +89,7 @@
         <div class="card-body">
             <img class="card-img-top" src="../../images/{{result.attachfile}}">
             <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
-            <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
+            <div class="card-date" data-date="{{result.created}}">{{result.created | format_datetime}}</div>
             <p class="card-desc">{{result.desc}}</p>
             <button onclick='editCard("{{result._id}}")' class="btn btn-outline-secondary">수정</button>
             <a href="#" class="delete btn btn-outline-danger"
@@ -104,7 +104,7 @@
 <ul class="pagination justify-content-center">
     {% if block_start - 1 > 0 %}
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write', page=block_start -1 , search_type = search_type, keyword = keyword )}}">[이전]</a>
+                             href="{{url_for('mypage', page=block_start -1 )}}">[이전]</a>
     </li>
     {% endif %}
     <!-- 페이지네이션을 위한 코드 작성 -->
@@ -121,14 +121,14 @@
     {% else %}
     <!-- ?page=i 형태로 쿼리스트링을 가진 url로 이동할 수 있다. -->
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write', page=i , search_type = search_type, keyword = keyword)}}">{{ i
+                             href="{{url_for('mypage', page=i )}}">{{ i
         }}</a></li>
     {% endif %}
     {% endif %}
     {% endfor %}
     {% if block_last < last_page_num %}
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write',page=block_last + 1 , search_type = search_type, keyword = keyword)}}">[다음]</a>
+                             href="{{url_for('mypage')}}">[다음]</a>
     </li>
     {% endif %}
 </ul>
