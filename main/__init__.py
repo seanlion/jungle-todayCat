@@ -12,7 +12,7 @@ mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
 
 
-BOARD_IMAGE_PATH = "/Users/colapa/jungle/jungle-todayCat/images"
+BOARD_IMAGE_PATH = "/Users/seung/Desktop/backend/todaycat/images"
 ALLOWED_EXTENSIONS = set(['png','pdf','jpg','JPG','JPEG', 'jpeg','gif'])
 
 # 이미지 경로에 쉽게 접근하기 위해 환경 변수 생성

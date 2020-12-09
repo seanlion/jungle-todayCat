@@ -34,7 +34,7 @@
 </head>
 <body>
 
-    <div class="container m-5">
+    <div id="wrapper" class="container">
         {% include "nav.html" %}
         {% block header%} {% endblock %}
         {% block content %}
@@ -59,6 +59,7 @@
         $(this).siblings('.fileName').val(filename);
     });
 
+
     function checkform(){
       if ($.trim($("#desc").val()) == "") {
         alert("코멘트를 입력하세요.");
@@ -66,6 +67,19 @@
         return false;
       }
      }
+
+      <!--    수정용 파일 이름 보이기-->
+       var new_uploadFile = $('#new_attachfile');
+       console.log(new_uploadFile);
+    new_uploadFile.on('change', function(){
+        if(window.FileReader){
+            var filename = $(this)[0].files[0].name;
+        } else {
+            var filename = $(this).val().split('/').pop().split('\\').pop();
+        }
+        $(this).siblings('.fileName').val(filename);
+    });
+
     </script>
 
 </body>

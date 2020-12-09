@@ -37,9 +37,12 @@
                 <img class="card-img-top" src="${card_src}">
                 <div class="card-body">
                 <div class="filebox">
-            <input type="file" class="control-file" name="new_attachfile" id="new_attachfile">
-            <label for="new_attachfile"><i class="fas fa-plus"></i></label>
-                    <input type="text" class="card-text" name="new_desc" id="new_desc" value="${card_desc}">
+                    <input type="file" class="control-file new_attachfile" name="new_attachfile" id="new_attachfile">
+                    <label for="new_attachfile"><i class="fas fa-plus"></i></label>
+                    <input type="text" class="fileName" readonly="readonly">
+                    <div class="text-container">
+                        <input type="text" class="new-card-text" name="new_desc" id="new_desc" value="${card_desc}">
+                    </div>
                     <button class="my-2 btn btn-outline-primary btn-sm" onclick='editCardSave("${id}")'>저장</button>
             </div>
             `
@@ -81,6 +84,7 @@
             }
         });
     });
+
 </script>
 
 {% if results is not none %}

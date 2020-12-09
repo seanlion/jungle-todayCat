@@ -2,10 +2,14 @@
     font-family: 'Single Day', cursive;
 }
 
+#wrapper {
+    margin : 0 auto;
+    margin-top : 15px;
+}
 
 .filebox {
     margin-bottom: 5px;
-    height: 100px;
+    height: 150px;
     width: 250px;
     display: inline-block;
     padding: .5em .75em;
@@ -79,7 +83,6 @@ label {
 .fileName{
     border : 0;
     text-align : center;
-
 }
 
 .card-date{

@@ -26,43 +26,45 @@ def edit_content():
 
 
 
-@app.route('/upload', methods=["POST", "GET"])
+@app.route('/upload', methods=["POST"])
 def write():
-
     created = round(datetime.utcnow().timestamp() * 1000)
     contents = mongo.db.contents
-    if request.method == "POST":
-        if session.get('id') is None:
-            flash("로그인해주세요.")
+    print(session.get('id'))
+    if session.get('id') is None or session.get('id') == "":
+        # connection reset 에러 해결. 발표 때 얘기하기
+        request.files.getlist('file')
+
+        flash("로그인해주세요.")
+        return redirect(url_for('login'))
+    else:
+        desc = request.form.get("desc")
+        filename = None
+        # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
+        if "attachfile" in request.files:
+            file = request.files["attachfile"]
+            # 원본 filename이 제대로 된 파일이름(확장자)을 가졌는지 확인
+            if file and allowed_file(file.filename):
+                # 새로운 파일네임을 만드는 함수를 실행시킴.
+                filename = check_filename(file.filename)
+                file.save(os.path.join(app.config["BOARD_IMAGE_PATH"], filename))
+
+        post = {
+            "desc": desc,
+            "created": created,
+            "attachfile": filename,
+            "writer_id": session.get("id"),
+            "writer_name": session.get("name")
+        }
+        x = contents.insert_one(post)
+        mainresults = contents.find({})
+        if "/mypage" in request.referrer:
+            return redirect(url_for('mypage'))
+        else:
             return redirect(url_for('index'))
-        else :
-            desc = request.form.get("desc")
-            filename = None
-            # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
-            if "attachfile" in request.files:
-                file = request.files["attachfile"]
-                # 원본 filename이 제대로 된 파일이름(확장자)을 가졌는지 확인
-                if file and allowed_file(file.filename):
-                    # 새로운 파일네임을 만드는 함수를 실행시킴.
-                    filename = check_filename(file.filename)
-                    file.save(os.path.join(app.config["BOARD_IMAGE_PATH"], filename))
-
-            post = {
-                "desc": desc,
-                "created": created,
-                "attachfile": filename,
-                "writer_id": session.get("id"),
-                "writer_name": session.get("name")
-            }
-            x = contents.insert_one(post)
-            mainresults = contents.find({})
-            if "/mypage" in request.referrer:
-                return redirect(url_for('mypage'))
-            else:
-                return redirect(url_for('index'))
 
 
-@app.route('/', methods=["GET"])
+@app.route('/', methods=["GET","POST"])
 def index():
     page = request.args.get("page", 1, type=int)
     limit = request.args.get("limit", 5, type=int)
