@@ -9,6 +9,8 @@ def index():
 @app.route('/edit', methods=["POST"])
 def edit_content():
     desc = request.form.get("desc")
+    id = request.form.get("id")
+    # updated = datetime.now(timezone.utc)
     filename = None
     print("desc:",desc)
     print("file_data:", request.files["new_attachfile"])
@@ -16,14 +18,21 @@ def edit_content():
     if file and allowed_file(file.filename):
         filename = check_filename(file.filename)
         file.save(os.path.join(app.config["BOARD_IMAGE_PATH"],filename))
+    print("filename:",filename)
     contents = mongo.db.contents
-    return 0
+    # 추후에 session id 가 같은 유저만 수정 가능해야 함
+    # data = contents.find_one({"_id": ObjectId(id)})
+    contents.update_one(
+        {"_id": ObjectId(id)},
+        {"$set": {"desc":desc, "attachfile": filename}}
+    )
+    return jsonify(data = "success")
 
 @app.route('/', methods=["GET","POST"])
 def write():
     if request.method == "POST":
         desc = request.form.get("desc")
-        created = datetime.now(timezone.utc)
+        created = round(datetime.utcnow().timestamp() *1000)
         filename = None
         # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
         if "attachfile" in request.files:
@@ -75,3 +84,11 @@ def check_filename(filename):
           # 공백을 기준으로 split되어 리스트에 담기는 데 그걸 공백 자리에 '_'를 넣어 다시 하나의 문자열로 만든다. 그리고 위에 reg에서 정의한 패턴(영문,한글,숫자,대시 등등이 아닌 문자)과 일치하다면 그 부분을 공백으로 만들어라. 그리고 그걸 문자열로 치환하고 "._"는 없애버리기. 기대결과는 경로로 들어오는 문자열 중 '.'이나 '/'같은거 다 없애고 하나의 문자열로 만드는것!
           filename= str(reg.sub('', '_'.join(filename.split()))).strip("._")
     return filename
+
+
+@app.template_filter('format_datetime')
+def format_datetime(ts):
+    now_timestamp = time.time()
+    offset = datetime.fromtimestamp(now_timestamp) - datetime.utcfromtimestamp(now_timestamp)
+    ts = datetime.fromtimestamp((int(ts)/1000)) + offset
+    return ts.strftime('%Y-%m-%d')

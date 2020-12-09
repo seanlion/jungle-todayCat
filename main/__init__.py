@@ -2,7 +2,7 @@ from flask import Flask,render_template,jsonify,request,session,redirect,url_for
 from flask_bcrypt import Bcrypt
 from flask_pymongo import PyMongo
 from datetime import datetime,timezone,timedelta
-import os,re
+import os,re, time
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
 
 BOARD_IMAGE_PATH = "/Users/seung/Desktop/backend/todaycat/images"
-ALLOWED_EXTENSIONS = set(['png','pdf','jpg', 'jpeg','gif'])
+ALLOWED_EXTENSIONS = set(['png','pdf','jpg','JPG','JPEG', 'jpeg','gif'])
 # 이미지 경로에 쉽게 접근하기 위해 환경 변수 생성
 app.config["BOARD_IMAGE_PATH"] = BOARD_IMAGE_PATH
 

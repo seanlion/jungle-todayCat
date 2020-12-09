@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f064d6-b3f6-478d-b604-692f54f7e625" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/delete.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/make.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/make.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/signup.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/signup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/mypage.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/mypage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -53,12 +53,11 @@
         console.log("new_img:",$('#new_attachfile')[0])
         var form_data = new FormData();
         if(new_img.length > 0 ){
-           form_data.append('file',new_img[0]);
+           form_data.append('new_attachfile',new_img[0]);
            form_data.append('desc', new_desc);
            form_data.append('id', id);
         }
-        console.log("desc:",form_data.get('desc'));
-        console.log("new_img:", form_data.get('id'));
+        console.log("desc:",form_data.get('new_attachfile'));
 
         $.ajax({
             type: 'POST',
@@ -67,7 +66,7 @@
             contentType: false,
             processData: false,
             success : function(data){
-                if(data["result"] == "success"){
+                if(data["data"] == "success"){
                     alert("수정 완료");
                     window.location.reload();
                 }
@@ -102,7 +101,7 @@
                 <div class="card-body">
 
                     <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
-                    <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
+                    <div class="card-date" data-date="{{result.created}}">{{result.created | format_datetime}}</div>
                     <p class="card-desc">{{result.desc}}</p>
                     <button onclick='editCard("{{result._id}}")' class="btn btn-primary">수정</button>
                     <a href="#" class="delete btn btn-sm btn-outline-secondary"
