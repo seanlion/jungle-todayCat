@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <form action="" method="POST">
+    <form action="{{url_for('login')}}" method="POST">
         <div class="mb-3">
             <label for="loginEmail" class="form-label">이메일</label>
             <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="name@example.com">

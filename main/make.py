@@ -44,6 +44,7 @@ def write():
     contents = mongo.db.contents
 
     if request.method == "POST":
+        print("url:",request.script_root)
         desc = request.form.get("desc")
         filename = None
         # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
@@ -59,12 +60,16 @@ def write():
             "desc": desc,
             "created": created,
             "attachfile": filename,
-            "writer_id": session.get("id")
+            "writer_id": session.get("id"),
+            "writer_name": session.get("name")
         }
         x = contents.insert_one(post)
         mainresults = contents.find({})
-        return render_template('home.html',mainresults=mainresults,limit=limit, page=page, block_start=block_start,
+        if request.referrer == "http://0.0.0.0:5000/":
+            return render_template('home.html',mainresults=mainresults,limit=limit, page=page, block_start=block_start,
                                block_last=block_last, last_page_num=last_page_num)
+        elif request.referrer == "http://0.0.0.0:5000/mypage":
+            return redirect(url_for('mypage'))
     else:
         mainresults = contents.find({}).skip((page - 1) * limit).limit(limit).sort("created", -1)
         return render_template('home.html', mainresults=mainresults, limit=limit, page=page, block_start=block_start,

@@ -1,67 +1,76 @@
-* {
+   * {
         font-family: 'Single Day', cursive;
     }
 
-.filebox {
-    margin-bottom: 5px;
-    height: 100px;
-    width: 250px;
-    display: inline-block;
-    padding: .5em .75em;
-    color: #999;
+    .filebox {
+        margin-bottom: 5px;
+        height: 100px;
+        width: 250px;
+        display: inline-block;
+        padding: .5em .75em;
+        color: #999;
 
-    line-height: normal;
-    vertical-align: middle;
-    horiz-align: center;
-    background-color: #fdfdfd;
-    cursor: pointer;
-    border: 1px solid #ebebeb;
-    border-bottom-color: #e2e2e2;
-    border-radius: .25em;
+        line-height: normal;
+        vertical-align: middle;
+        horiz-align: center;
+        background-color: #ffffff;
+        cursor: pointer;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+    }
+
+    .card-text {
+        margin: 0px;
+        width: 250px;
+    }
+
+    .btn {
+        font-size: 20px;
+        width: auto;
+        height: auto;
+    }
+
+    .btn.btn-outline-primary {
+        margin-top: 10px;
+    }
+
+    .filebox input[type="file"] { /* 파일 필드 숨기기 */
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    .card-body {
+        width: auto;
+        height: auto;
+        text-align: center;
+
+    }
+
+    .jumbotron{
+        padding-bottom: 10px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .card{
+        display : flex;
+        align-item : center;
+        margin : 0 auto;
+        width: 300px;
+        background-color : transparent;
+        border : 0;
+    }
+#plus {
+    line-height: 5;
 }
 
-.card-text {
-    margin: 0px;
-    width: 250px;
-}
-
-.btn {
-    font-size: 20px;
-    width: auto;
-    height: auto;
-}
-
-.btn.btn-outline-primary {
-    margin-top: 10px;
-}
-
-.filebox input[type="file"] { /* 파일 필드 숨기기 */
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-.card-body {
-    width: auto;
-    height: auto;
-    text-align: center;
-
-}
-
-.jumbotron{
-    padding-bottom: 10px;
-    text-align: center;
-    align-items: center;
-}
-
-.card{
-    width: 300px;
-}
 
 a {
     color : white;
@@ -82,14 +91,6 @@ p {
     margin-bottom : 0;
 }
 
-.card {
-    display : flex;
-    align-item : center;
-}
-
-.card-text{
-    margin : 10px;
-}
 
 control-file{
     text-align : center;

@@ -13,7 +13,7 @@ def register():
         password_hash = bcrypt.generate_password_hash(password1_receive)
         user = {"email": email_receive, "password": password_hash, "name": name_receive}
         mongo.db.users.insert_one(user)
-        flash({"msg":"회원가입이 완료되었습니다."})
+        flash("회원가입이 완료되었습니다.")
         return redirect(url_for("login"))
     else :
         return render_template('signup.html')

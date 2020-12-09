@@ -1,6 +1,6 @@
 <div class="topnav">
-  <a class="active" href="/">Home</a>
-  {% if res is not none %}
+  <a href="/">Home</a>
+  {% if session.get('id') is not none %}
     <!-- logout view function을 만들어야 함. -->
       <a class="login" href="{{url_for('logout')}}">로그아웃</a>
   {% else %}
@@ -11,7 +11,7 @@
         <a class="login" href="{{url_for('login')}}">로그인</a>
       {% endif %}
   {% endif %}
-  <a href={{url_for('gets')}}>Mypage</a>
+  <a href={{url_for('mypage')}}>Mypage</a>
 </div>
 
 

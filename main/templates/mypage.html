@@ -6,12 +6,21 @@
     <div class="jumbotron">
         <h1 class="display-4">
             <img src="https://twemoji.maxcdn.com/2/72x72/1f431.png">
-            오늘의 고양이</h1>
-        <p class="lead"></p>
-        <hr class="my-4">
-        <h3 class="desc-4">마이페이지
-            <img src="https://twemoji.maxcdn.com/2/72x72/1f408.png" width="40px" height="40px"></h3>
+            마이페이지</h1>
+        <div class="card">
+                <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="filebox">
+                            <input type="file" class="control-file" name="attachfile" id="attachfile">
+                            <label for="attachfile"><i id="plus" class="fas fa-plus"></i></label>
+                        </div>
+                        <input type="text" class="card-text" name="desc" id="desc" placeholder="사진의 코멘트를 넣어주세요.">
+                        <button type="submit" class="btn btn-outline-primary">자랑하기</button>
+                    </div>
+                </form>
+        </div>
     </div>
+
 </div>
 {% endblock %}
 
@@ -73,21 +82,6 @@
     });
 </script>
 
-<div class="card" style="width: 18rem;">
-    <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
-
-
-        <div class="card-body">
-            <div class="filebox">
-                <input type="file" class="control-file" name="attachfile" id="attachfile">
-                <label for="attachfile"><i class="fas fa-plus"></i></label>
-            </div>
-            <input type="text" class="card-text" name="desc" id="desc">
-            <button type="submit" class="btn btn-outline-primary">자랑하기</button>
-        </div>
-    </form>
-</div>
-
 {% if results is not none %}
 <div class="card-columns">
     {% for result in results %}
@@ -109,7 +103,6 @@
 <!--페이지네이션-->
 <ul class="pagination justify-content-center">
     {% if block_start - 1 > 0 %}
-    <!-- li태그랑 클래스 추가 -->
     <li class="page-item"><a class="page-link"
                              href="{{url_for('write', page=block_start -1 , search_type = search_type, keyword = keyword )}}">[이전]</a>
     </li>
@@ -127,14 +120,12 @@
     <li class="page-item"><a class="page-link active text-warning">{{ i }}</a></li>
     {% else %}
     <!-- ?page=i 형태로 쿼리스트링을 가진 url로 이동할 수 있다. -->
-    <!-- 검색기능 때문에 코드 추가 : 여기 코드 수정을 안하면 페이지가 이동될때마다 검색유형,검색어 관한 쿼리스트링이 포함되지않기 때문에 검색결과가 풀린다. 그래서 쿼리스트링으로 검색유형,검색어를 같이 넘겨줘야 한다. -->
     <li class="page-item"><a class="page-link"
                              href="{{url_for('write', page=i , search_type = search_type, keyword = keyword)}}">{{ i
         }}</a></li>
     {% endif %}
     {% endif %}
     {% endfor %}
-    <!-- 후속으로 코드추가 :여기도 검색기능 관련해서 쿼리스트링을 추가해야 함. -->
     {% if block_last < last_page_num %}
     <li class="page-item"><a class="page-link"
                              href="{{url_for('write',page=block_last + 1 , search_type = search_type, keyword = keyword)}}">[다음]</a>

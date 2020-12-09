@@ -13,6 +13,21 @@
         <hr class="my-4">
         <h3 class="desc-4">당신의 고양이를 자랑해주세요!
             <img src="https://twemoji.maxcdn.com/2/72x72/1f408.png" width="40px" height="40px"></h3>
+
+        <div class="card">
+            <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+                <input type="hidden" value="">
+                <div class="card-body">
+                    <div class="filebox">
+                        <input type="file" class="control-file" name="attachfile" id="attachfile">
+                        <label for="attachfile"><i id="plus" class="fas fa-plus"></i></label>
+                    </div>
+                    <input type="text" class="card-text" name="desc" id="desc" placeholder="사진의 코멘트를 넣어주세요.">
+                    <button type="submit" class="btn btn-outline-primary">자랑하기</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 {% endblock %}
@@ -62,27 +77,13 @@
 
 </script>
 
-<div class="card">
-    <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
-        <div class="card-body">
-            <div class="filebox">
-                <input type="file" class="control-file" name="attachfile" id="attachfile">
-                <label for="attachfile"><i class="fas fa-plus"></i></label>
-            </div>
-            <input type="text" class="card-text" name="desc" id="desc">
-            <button type="submit" class="btn btn-outline-primary">자랑하기</button>
-        </div>
-    </form>
-</div>
+
 
 <div class="random_photo">
         <button id="pop_button" class="btn btn-primary" type="button" onclick="randomPhoto()">투데이 고양이!</button>
         <div class="modal_spot"></div>
 </div>
 
-{% endblock %}
-
-{% block content %}
 
 {% if mainresults is not none %}
 <div class="card-columns">
@@ -90,8 +91,8 @@
     <div class="card-body">
         <div id="{{mainresult._id}}" class="card" data-src="../../images/{{mainresult.attachfile}}" data-desc='{{mainresult.desc}}'>
             <img class="card-img-top" src="../../images/{{mainresult.attachfile}}">
-            <div class="card-name" data-name="{{mainresult.name}}">{{mainresult.name}}</div>
-            <div class="card-date" data-date="{{mainresult.created}}">{{mainresult.created}}</div>
+            <div class="card-name" data-name="{{mainresult.name}}">{{mainresult.writer_name}}</div>
+            <div class="card-date" data-date="{{mainresult.created}}">{{mainresult.created | format_datetime}}</div>
             <p class="card-desc">{{mainresult.desc}}</p>
         </div>
     </div>
@@ -104,7 +105,7 @@
     {% if block_start - 1 > 0 %}
     <!-- li태그랑 클래스 추가 -->
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write', page=block_start -1 , search_type = search_type, keyword = keyword )}}">[이전]</a>
+                             href="{{url_for('write', page=block_start -1)}}">[이전]</a>
     </li>
     {% endif %}
     <!-- 페이지네이션을 위한 코드 작성 -->
@@ -122,7 +123,7 @@
     <!-- ?page=i 형태로 쿼리스트링을 가진 url로 이동할 수 있다. -->
     <!-- 검색기능 때문에 코드 추가 : 여기 코드 수정을 안하면 페이지가 이동될때마다 검색유형,검색어 관한 쿼리스트링이 포함되지않기 때문에 검색결과가 풀린다. 그래서 쿼리스트링으로 검색유형,검색어를 같이 넘겨줘야 한다. -->
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write', page=i , search_type = search_type, keyword = keyword)}}">{{ i
+                             href="{{url_for('write', page=i)}}">{{ i
         }}</a></li>
     {% endif %}
     {% endif %}
@@ -130,7 +131,7 @@
     <!-- 후속으로 코드추가 :여기도 검색기능 관련해서 쿼리스트링을 추가해야 함. -->
     {% if block_last < last_page_num %}
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write',page=block_last + 1 , search_type = search_type, keyword = keyword)}}">[다음]</a>
+                             href="{{url_for('write',page=block_last + 1 )}}">[다음]</a>
     </li>
     {% endif %}
 </ul>
