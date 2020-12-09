@@ -1,7 +1,18 @@
 from main import *
 from string import digits, ascii_uppercase, ascii_lowercase
 
-@app.route('/get', methods=["GET","POST"])
+
+@app.route('/edit', methods=["POST"])
+def edit_content():
+    desc = request.form.get("desc")
+    file = request.files["attachfile"]
+    if file and allowed_file(file.filename):
+        filename = check_filename(file.filename)
+        file.save(os.path.join(app.config["BOARD_IMAGE_PATH"],filename))
+    contents = mongo.db.contents
+    return 0
+
+@app.route('/', methods=["GET","POST"])
 def write():
     if request.method == "POST":
         desc = request.form.get("desc")
