@@ -1,77 +1,6 @@
 {% extends "main.html" %}
 {% block head %}
 <style>
-    * {
-        font-family: 'Single Day', cursive;
-    }
-
-    .display-4 {
-        text-align: center;
-    }
-
-    .desc-4 {
-        text-align: center;
-    }
-
-    .filebox label {
-        margin: 15px;
-        height: auto;
-        width: auto;
-        display: inline-block;
-        padding: .5em .75em;
-        color: #999;
-
-        line-height: normal;
-        vertical-align: middle;
-        horiz-align: center;
-        background-color: #fdfdfd;
-        cursor: pointer;
-        border: 1px solid #ebebeb;
-        border-bottom-color: #e2e2e2;
-        border-radius: .25em;
-    }
-
-    .card-text {
-        margin: 0px;
-        width: auto;
-    }
-
-    .btn {
-        font-size: 20px;
-        width: auto;
-        height: auto;
-    }
-
-    .btn.btn-outline-primary {
-        margin-top: 10px;
-    }
-
-    .filebox input[type="file"] { /* 파일 필드 숨기기 */
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-    }
-
-    .card-img-top {
-        width: 286px;
-        height: auto;
-    }
-
-    .card-body {
-        width: 286px;
-        height: auto;
-        text-align: center;
-    }
-
-    .card {
-        width: 286px;
-        margin: 0px;
-    }
 
 </style>
 
@@ -94,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-<script>
+<script type="text/javascript">
     function editCard(id) {
         console.log("id:", id)
         let card_src = $('#' + id).data("src");
@@ -117,38 +46,82 @@
     function editCardSave(id) {
         let new_desc = $('#new_desc').val();
         let new_img = $('#new_attachfile')[0].files;
-        console.log("new_img:", $('#new_attachfile')[0])
         var form_data = new FormData();
-    }
 
-    if(new_img.length > 0 ){
-        form_data.append('new_attachfile', new_img[0]);
-        form_data.append('desc', new_desc);
-        form_data.append('id', id);
-    }
-
-    $.ajax({
-        type: 'POST',
-        url: '/edit',
-        data: form_data,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            if (data["result"] == "success") {
-                alert("수정 완료");
-                window.location.reload();
-
-            }
+        if(new_img.length > 0 ){
+            form_data.append('new_attachfile', new_img[0]);
+            form_data.append('desc', new_desc);
+            form_data.append('id', id);
         }
+
+        $.ajax({
+            type: 'POST',
+            url: '/edit',
+            data: form_data,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data["result"] == "success") {
+                    alert("수정 완료");
+                    window.location.reload();
+
+                }
+            }
+        })
+      }
+
+    $(document).ready(function() {
+        $(".delete").on('click', function() {
+            if (confirm("정말로 삭제하시겠습니까?")) {  location.href = $(this).data('uri');   }
+        })
     })
 
-    $(document).ready(function () {
-        $(".delete").on('click', function () {  // 클래스값이 delete인 엘리먼트가 눌리면?
-            if (confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림
-                location.href = $(this).data('uri');  // data-uri 속성값으로 URL 호출
+
+
+    function randomPhoto(){
+       $.ajax({
+            type:'POST',
+            url: '/photos',
+            success: function(url){
+                alert("생성완료!")
+                console.log("url:",url)
+                var image = $("<img>").attr("src",url).css('max-width','900px')
+                console.log("image:",image)
+                let temp_html = `
+                    <div id="myModal" class="modal">
+                         <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>오늘의 고양이 사진!</p>
+                        <img class="card-img-top" style="width:200px;" src="${url}">
+                        </div>
+                    </div>
+                `
+                $('.modal_spot').html(temp_html);
+                var modal = document.getElementById("myModal");
+                var close_button = document.getElementsByClassName("close")[0];
+                showModal(modal,close_button);
             }
-        });
-    });
+
+        })
+
+    }
+
+
+    function showModal(modal,close_button){
+        modal.style.display = "block";
+        close_button.onclick = function() {
+          modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    }
+
+
+
+
 </script>
 
 <div class="card" style="width: 18rem;">
@@ -166,6 +139,11 @@
     </form>
 </div>
 
+<div class="random_photo">
+        <button id="pop_button" class="btn btn-primary" type="button" onclick="randomPhoto()">투데이 고양이!</button>
+        <div class="modal_spot"></div>
+</div>
+
 {% if results is not none %}
 <div class="card-columns">
     {% for result in results %}
@@ -174,7 +152,7 @@
         <div class="card-body">
 
             <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
-            <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
+            <div class="card-date" data-date="{{result.created}}">{{result.created | format_datetime}}</div>
             <p class="card-desc">{{result.desc}}</p>
             <button onclick='editCard("{{result._id}}")' class="btn btn-outline-secondary">수정</button>
             <a href="#" class="delete btn btn-outline-danger"

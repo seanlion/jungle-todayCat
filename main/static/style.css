@@ -1,3 +1,76 @@
+* {
+        font-family: 'Single Day', cursive;
+    }
+
+    .display-4 {
+        text-align: center;
+    }
+
+    .desc-4 {
+        text-align: center;
+    }
+
+    .filebox label {
+        margin: 15px;
+        height: auto;
+        width: auto;
+        display: inline-block;
+        padding: .5em .75em;
+        color: #999;
+
+        line-height: normal;
+        vertical-align: middle;
+        horiz-align: center;
+        background-color: #fdfdfd;
+        cursor: pointer;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+    }
+
+    .card-text {
+        margin: 0px;
+        width: auto;
+    }
+
+    .btn {
+        font-size: 20px;
+        width: auto;
+        height: auto;
+    }
+
+    .btn.btn-outline-primary {
+        margin-top: 10px;
+    }
+
+    .filebox input[type="file"] { /* 파일 필드 숨기기 */
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    .card-img-top {
+        width: 286px;
+        height: auto;
+    }
+
+    .card-body {
+        width: 286px;
+        height: auto;
+        text-align: center;
+    }
+
+    .card {
+        width: 286px;
+        margin: 0px;
+    }
+
+
 a {
     color : white;
 }
@@ -60,4 +133,43 @@ control-file{
 
 .topnav .login {
     float: right;
+}
+
+/* random photo modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -70,10 +70,19 @@ def write():
         return render_template('home.html', results=results, limit=limit, page=page, block_start=block_start,
                                block_last=block_last, last_page_num=last_page_num)
 
+@app.route('/photos', methods=["POST"])
+def random_photo():
+    files = os.listdir(BOARD_IMAGE_PATH)
+    d = random.choice(files)
+    print("random_photo:",d)
+    return url_for('uploaded_file',filename=d)
 
 @app.route("/images/<filename>")
 def uploaded_file(filename):
+    print("uploaded file 함수 접속.")
   # WYSWIG 강의의 28분 구간을 참조.
+    result = send_from_directory(app.config["BOARD_IMAGE_PATH"], filename)
+    print("result:",result)
     return send_from_directory(app.config["BOARD_IMAGE_PATH"], filename)
 
 def allowed_file(filename):
