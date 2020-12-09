@@ -88,11 +88,11 @@
     <div id="{{result._id}}" class="card" data-src="../../images/{{result.attachfile}}" data-desc='{{result.desc}}'>
         <div class="card-body">
             <img class="card-img-top" src="../../images/{{result.attachfile}}">
-            <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
+            <div class="card-name" data-name="{{result.name}}">{{result.writer_name}}의 고양이</div>
             <div class="card-date" data-date="{{result.created}}">{{result.created | format_datetime}}</div>
             <p class="card-desc">{{result.desc}}</p>
-            <button onclick='editCard("{{result._id}}")' class="btn btn-outline-secondary">수정</button>
-            <a href="#" class="delete btn btn-outline-danger"
+            <button onclick='editCard("{{result._id}}")' class="btn btn-sm btn-outline-secondary">수정</button>
+            <a href="#" class="delete btn btn-sm btn-outline-danger"
                data-uri="{{ url_for('delete', _id = result._id) }}">삭제</a>
         </div>
     </div>
