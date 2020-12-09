@@ -119,28 +119,28 @@
         let new_img = $('#new_attachfile')[0].files;
         console.log("new_img:", $('#new_attachfile')[0])
         var form_data = new FormData();
-        if (new_img.length > 0) {
-            form_data.append('file', new_img[0]);
-            form_data.append('desc', new_desc);
-            form_data.append('id', id);
-        }
-        console.log("desc:", form_data.get('desc'));
-        console.log("new_img:", form_data.get('id'));
-
-        $.ajax({
-            type: 'POST',
-            url: '/edit',
-            data: form_data,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                if (data["result"] == "success") {
-                    alert("수정 완료");
-                    window.location.reload();
-                }
-            }
-        })
     }
+
+    if(new_img.length > 0 ){
+        form_data.append('new_attachfile', new_img[0]);
+        form_data.append('desc', new_desc);
+        form_data.append('id', id);
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/edit',
+        data: form_data,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data["result"] == "success") {
+                alert("수정 완료");
+                window.location.reload();
+
+            }
+        }
+    })
 
     $(document).ready(function () {
         $(".delete").on('click', function () {  // 클래스값이 delete인 엘리먼트가 눌리면?
@@ -180,8 +180,8 @@
             <a href="#" class="delete btn btn-outline-danger"
                data-uri="{{ url_for('delete', _id = result._id) }}">삭제</a>
         </div>
-    </div>
-    {% endfor %}
+</div>
+{% endfor %}
 </div>
 {% endif %}
 {% endblock %}
