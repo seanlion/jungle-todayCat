@@ -8,11 +8,12 @@
             <img src="https://twemoji.maxcdn.com/2/72x72/1f431.png">
             마이페이지</h1>
         <div class="card">
-                <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+                <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data" onsubmit="return checkform()">
                     <div class="card-body">
                         <div class="filebox">
-                            <input type="file" class="control-file" name="attachfile" id="attachfile">
+                            <input type="file" class="control-file attachfile" name="attachfile" id="attachfile">
                             <label for="attachfile"><i id="plus" class="fas fa-plus"></i></label>
+                            <input type="text" class="fileName" readonly="readonly">
                         </div>
                         <input type="text" class="card-text" name="desc" id="desc" placeholder="사진의 코멘트를 넣어주세요.">
                         <button type="submit" class="btn btn-outline-primary">자랑하기</button>
@@ -50,7 +51,7 @@
         let new_img = $('#new_attachfile')[0].files;
         console.log("new_img:", $('#new_attachfile')[0])
         var form_data = new FormData();
-    }
+
 
     if (new_img.length > 0) {
         form_data.append('new_attachfile', new_img[0]);
@@ -69,10 +70,10 @@
                 alert("수정 완료");
                 window.location.reload();
 
+                }
             }
-        }
-    })
-
+        })
+    }
     $(document).ready(function () {
         $(".delete").on('click', function () {  // 클래스값이 delete인 엘리먼트가 눌리면?
             if (confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림

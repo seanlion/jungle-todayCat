@@ -22,7 +22,7 @@ def edit_content():
         {"_id": ObjectId(id)},
         {"$set": {"desc":desc, "attachfile": filename}}
     )
-    return jsonify(data = "success")
+    return jsonify({"result" : "success"})
 
 @app.route('/upload', methods=["POST","GET"])
 def write():

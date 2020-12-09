@@ -4,6 +4,7 @@
 
 
 {% block header %}
+
 <div class="wrap">
     <div class="jumbotron">
         <h1 class="display-4">
@@ -15,15 +16,18 @@
             <img src="https://twemoji.maxcdn.com/2/72x72/1f408.png" width="40px" height="40px"></h3>
 
         <div class="card">
-            <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+            <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data" onsubmit="return checkform()">
                 <input type="hidden" value="">
                 <div class="card-body">
                     <div class="filebox">
-                        <input type="file" class="control-file" name="attachfile" id="attachfile">
-                        <label for="attachfile"><i id="plus" class="fas fa-plus"></i></label>
+                            <input type="file" class="control-file attachfile" name="attachfile" id="attachfile">
+                            <label for="attachfile"><i id="plus" class="fas fa-plus"></i></label>
+                        <input type="text" class="fileName" readonly="readonly">
                     </div>
-                    <input type="text" class="card-text" name="desc" id="desc" placeholder="사진의 코멘트를 넣어주세요.">
-                    <button type="submit" class="btn btn-outline-primary">자랑하기</button>
+                    <div class="text-container">
+                        <input type="text" class="card-text" name="desc" id="desc" placeholder="사진의 코멘트를 넣어주세요.">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary" >자랑하기</button>
                 </div>
             </form>
         </div>
