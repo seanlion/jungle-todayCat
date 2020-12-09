@@ -1,8 +1,8 @@
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
+  <a class="active" href="/">Home</a>
   {% if res is not none %}
     <!-- logout view function을 만들어야 함. -->
-      <a class="login" href="{{url_for('login')}}">로그아웃</a>
+      <a class="login" href="{{url_for('logout')}}">로그아웃</a>
   {% else %}
      <!-- 로그인 페이지에서는 로그인 url이 안보여도 됨. -->
       {% if request.url_rule.endpoint == 'login' %}
@@ -11,7 +11,7 @@
         <a class="login" href="{{url_for('login')}}">로그인</a>
       {% endif %}
   {% endif %}
-  <a href={{url_for('write')}}>Mypage</a>
+  <a href={{url_for('gets')}}>Mypage</a>
 </div>
 
 

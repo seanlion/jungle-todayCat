@@ -1,76 +1,147 @@
 {% extends "main.html" %}
 
-{% block head %}
 
-<script type='text/javascript'>
-c
-</script>
-
-{% endblock %}
-
-
-{% block content %}
-<h3>my page</h3>
-<!--업로드 영역-->
-<div class="row row-cols-md-3 my-3">
-    <div class="form-group col mx-3 mb-4">
-        <div class="card" style="width: 18rem;">
-            <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
-                <input type="file" class="control-file" name="attachfile" id="attachfile">
-                <div class="card-body">
-                    <input type="text" class="card-text" name="desc" id="desc">
-                    <button type="submit" class="btn btn-primary">업로드</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!--콘텐츠 영역 -->
-
-    <div class="card-columns">
-        {% for result in results %}
-        <div class="card">
-            <img class="card-img-top" src="../../images/{{result.attachfile}}">
-            <div class="card-body">
-                <div class="card-name">{{result.name }}</div>
-                <div class="card-date">{{result.created}}</div>
-                <p class="card-desc">{{result.desc}}</p>
-
-                <a href="#" class="delete btn btn-sm btn-outline-secondary"
-                   data-uri="{{ url_for('.delete') }}">삭제</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <div class="col mb-4 mx-3 card" style="width: 18rem;">
-        <img src=".." class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-    </div>
-    <div class="col mb-4 mx-3 card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-    </div>
-    <div class="col mb-4 mx-3 card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-    </div>
-    <div class="col mb-4 mx-3 card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
+{% block header %}
+<div class="wrap">
+    <div class="jumbotron">
+        <h1 class="display-4">
+            <img src="https://twemoji.maxcdn.com/2/72x72/1f431.png">
+            오늘의 고양이</h1>
+        <p class="lead"></p>
+        <hr class="my-4">
+        <h3 class="desc-4">마이페이지
+            <img src="https://twemoji.maxcdn.com/2/72x72/1f408.png" width="40px" height="40px"></h3>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
+<script>
+    function editCard(id) {
+        console.log("id:", id)
+        let card_src = $('#' + id).data("src");
+        let card_desc = $('#' + id).data("desc");
+
+        let temp_html = `
+            <div class="card">
+                <img class="card-img-top" src="${card_src}">
+                <div class="card-body">
+                <div class="filebox">
+            <input type="file" class="control-file" name="new_attachfile" id="new_attachfile">
+            <label for="new_attachfile"><i class="fas fa-plus"></i></label>
+                    <input type="text" class="card-text" name="new_desc" id="new_desc" value="${card_desc}">
+                    <button class="my-2 btn btn-outline-primary btn-sm" onclick='editCardSave("${id}")'>저장</button>
+            </div>
+            `
+        $('#' + id).html(temp_html);
+    }
+
+    function editCardSave(id) {
+        let new_desc = $('#new_desc').val();
+        let new_img = $('#new_attachfile')[0].files;
+        console.log("new_img:", $('#new_attachfile')[0])
+        var form_data = new FormData();
+    }
+
+    if (new_img.length > 0) {
+        form_data.append('new_attachfile', new_img[0]);
+        form_data.append('desc', new_desc);
+        form_data.append('id', id);
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/edit',
+        data: form_data,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data["result"] == "success") {
+                alert("수정 완료");
+                window.location.reload();
+
+            }
+        }
+    })
+
+    $(document).ready(function () {
+        $(".delete").on('click', function () {  // 클래스값이 delete인 엘리먼트가 눌리면?
+            if (confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림
+                location.href = $(this).data('uri');  // data-uri 속성값으로 URL 호출
+            }
+        });
+    });
+</script>
+
+<div class="card" style="width: 18rem;">
+    <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+
+
+        <div class="card-body">
+            <div class="filebox">
+                <input type="file" class="control-file" name="attachfile" id="attachfile">
+                <label for="attachfile"><i class="fas fa-plus"></i></label>
+            </div>
+            <input type="text" class="card-text" name="desc" id="desc">
+            <button type="submit" class="btn btn-outline-primary">자랑하기</button>
+        </div>
+    </form>
+</div>
+
+{% if results is not none %}
+<div class="card-columns">
+    {% for result in results %}
+    <div id="{{result._id}}" class="card" data-src="../../images/{{result.attachfile}}" data-desc='{{result.desc}}'>
+        <div class="card-body">
+            <img class="card-img-top" src="../../images/{{result.attachfile}}">
+            <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
+            <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
+            <p class="card-desc">{{result.desc}}</p>
+            <button onclick='editCard("{{result._id}}")' class="btn btn-outline-secondary">수정</button>
+            <a href="#" class="delete btn btn-outline-danger"
+               data-uri="{{ url_for('delete', _id = result._id) }}">삭제</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!--페이지네이션-->
+<ul class="pagination justify-content-center">
+    {% if block_start - 1 > 0 %}
+    <!-- li태그랑 클래스 추가 -->
+    <li class="page-item"><a class="page-link"
+                             href="{{url_for('write', page=block_start -1 , search_type = search_type, keyword = keyword )}}">[이전]</a>
+    </li>
+    {% endif %}
+    <!-- 페이지네이션을 위한 코드 작성 -->
+    <!-- block_last까지 출력하기 위해 range에 +1을 추가함. -->
+    {% for i in range(block_start, block_last + 1) %}
+    <!-- 현재 있는 페이지 숫자가 내용을 가지고 있는 페이지 숫자보다 큰 경우 노출이 되지 않아야 함. -->
+    {% if i > last_page_num %}
+    {{ "" }}
+
+    {% else %}
+    <!-- 페이지에 링크를 거는 작업 -->
+    {% if i == page%}
+    <li class="page-item"><a class="page-link active text-warning">{{ i }}</a></li>
+    {% else %}
+    <!-- ?page=i 형태로 쿼리스트링을 가진 url로 이동할 수 있다. -->
+    <!-- 검색기능 때문에 코드 추가 : 여기 코드 수정을 안하면 페이지가 이동될때마다 검색유형,검색어 관한 쿼리스트링이 포함되지않기 때문에 검색결과가 풀린다. 그래서 쿼리스트링으로 검색유형,검색어를 같이 넘겨줘야 한다. -->
+    <li class="page-item"><a class="page-link"
+                             href="{{url_for('write', page=i , search_type = search_type, keyword = keyword)}}">{{ i
+        }}</a></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    <!-- 후속으로 코드추가 :여기도 검색기능 관련해서 쿼리스트링을 추가해야 함. -->
+    {% if block_last < last_page_num %}
+    <li class="page-item"><a class="page-link"
+                             href="{{url_for('write',page=block_last + 1 , search_type = search_type, keyword = keyword)}}">[다음]</a>
+    </li>
+    {% endif %}
+</ul>
+<br>
+
 
 {% endblock %}

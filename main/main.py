@@ -6,14 +6,13 @@ client = MongoClient('localhost', 27017)
 db = client.myDatabase
 
 
-@app.route('/get', methods=['GET'])
+@app.route('/get/my', methods=['GET'])
 def gets():
-    results = list(db.contents.find({}))
-    return render_template('/home.html', results=results)
+    id_receive = session.get("id")
+    results = list(db.contents.find({'writer_id':id_receive}))
+    return render_template('/mypage.html', results=results)
 
-
-# @app.route('/get/my', methods=['GET'])
-# def my_gets():
-#     userid_receive = request.user.userid
-#     my_result = list(db.contents.find({'userid':userid_receive}))
-#     return render_template('/mypage.html', my_result=my_result)
+@app.route('/get', methods=['GET'])
+def maingets():
+    mainresults = list(db.contents.find({}))
+    return render_template('/home.html', mainresults=mainresults)

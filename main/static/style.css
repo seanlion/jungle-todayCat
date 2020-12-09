@@ -2,74 +2,66 @@
         font-family: 'Single Day', cursive;
     }
 
-    .display-4 {
-        text-align: center;
-    }
+.filebox {
+    margin-bottom: 5px;
+    height: 100px;
+    width: 250px;
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
 
-    .desc-4 {
-        text-align: center;
-    }
+    line-height: normal;
+    vertical-align: middle;
+    horiz-align: center;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
 
-    .filebox label {
-        margin: 15px;
-        height: auto;
-        width: auto;
-        display: inline-block;
-        padding: .5em .75em;
-        color: #999;
+.card-text {
+    margin: 0px;
+    width: 250px;
+}
 
-        line-height: normal;
-        vertical-align: middle;
-        horiz-align: center;
-        background-color: #fdfdfd;
-        cursor: pointer;
-        border: 1px solid #ebebeb;
-        border-bottom-color: #e2e2e2;
-        border-radius: .25em;
-    }
+.btn {
+    font-size: 20px;
+    width: auto;
+    height: auto;
+}
 
-    .card-text {
-        margin: 0px;
-        width: auto;
-    }
+.btn.btn-outline-primary {
+    margin-top: 10px;
+}
 
-    .btn {
-        font-size: 20px;
-        width: auto;
-        height: auto;
-    }
+.filebox input[type="file"] { /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
 
-    .btn.btn-outline-primary {
-        margin-top: 10px;
-    }
+.card-body {
+    width: auto;
+    height: auto;
+    text-align: center;
 
-    .filebox input[type="file"] { /* 파일 필드 숨기기 */
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-    }
+}
 
-    .card-img-top {
-        width: 286px;
-        height: auto;
-    }
+.jumbotron{
+    padding-bottom: 10px;
+    text-align: center;
+    align-items: center;
+}
 
-    .card-body {
-        width: 286px;
-        height: auto;
-        text-align: center;
-    }
-
-    .card {
-        width: 286px;
-        margin: 0px;
-    }
-
+.card{
+    width: 300px;
+}
 
 a {
     color : white;
