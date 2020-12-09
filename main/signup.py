@@ -14,6 +14,6 @@ def register():
         user = {"email": email_receive, "password": password_hash, "name": name_receive}
         mongo.db.users.insert_one(user)
         flash({"msg":"회원가입이 완료되었습니다."})
-        return redirect(url_for("loginpage"))
+        return redirect(url_for("login"))
     else :
         return render_template('signup.html')

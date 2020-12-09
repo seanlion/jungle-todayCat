@@ -17,7 +17,7 @@ def login():
             user_password = user["password"]
         else:
             flash({"msg": "이메일이 일치하지 않습니다."})
-            return redirect(url_for("loginoage"))
+            return redirect(url_for("loginpage"))
         login_data = {'id':email, 'pass':password}
         login_url = "http://localhost:5000/login"
         # db에서 가져온 비밀번호는 해쉬화되어 있기 때문에 새로 가져온 비밀번호를 해쉬화해서 check_password_hash 메서드로 비교(True, False 반환)

@@ -62,12 +62,12 @@ def write():
             "writer_id": session.get("id")
         }
         x = contents.insert_one(post)
-        results = contents.find({})
-        return render_template('home.html',results=results,limit=limit, page=page, block_start=block_start,
+        mainresults = contents.find({})
+        return render_template('home.html',mainresults=mainresults,limit=limit, page=page, block_start=block_start,
                                block_last=block_last, last_page_num=last_page_num)
     else:
-        results = contents.find({}).skip((page - 1) * limit).limit(limit).sort("created", -1)
-        return render_template('home.html', results=results, limit=limit, page=page, block_start=block_start,
+        mainresults = contents.find({}).skip((page - 1) * limit).limit(limit).sort("created", -1)
+        return render_template('home.html', mainresults=mainresults, limit=limit, page=page, block_start=block_start,
                                block_last=block_last, last_page_num=last_page_num)
 
 
