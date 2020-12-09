@@ -1,7 +1,11 @@
-from flask import Flask,render_template,jsonify,request,session,redirect,url_for,send_from_directory,flash
+from flask import Flask,render_template,jsonify,request,session,redirect,url_for,send_from_directory,flash, get_flashed_messages
 from flask_bcrypt import Bcrypt
 from flask_pymongo import PyMongo
 from datetime import datetime,timezone,timedelta
+from flask_wtf import FlaskForm
+from wtforms import StringField, TextAreaField, PasswordField
+from wtforms.fields.html5 import EmailField
+from wtforms.validators import DataRequired, Length, EqualTo, Email
 import os,re, time,math,requests
 from bson.objectid import ObjectId
 
@@ -11,7 +15,7 @@ mongo = PyMongo(app)
 
 bcrypt = Bcrypt(app)
 
-BOARD_IMAGE_PATH = "/Users/seung/Desktop/backend/todaycat/images"
+BOARD_IMAGE_PATH = "/Users/colapa/jungle/jungle-todayCat/images"
 ALLOWED_EXTENSIONS = set(['png','pdf','jpg','JPG','JPEG', 'jpeg','gif'])
 
 # 이미지 경로에 쉽게 접근하기 위해 환경 변수 생성

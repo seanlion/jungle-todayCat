@@ -22,6 +22,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
 {% block head%} {% endblock %}
 
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+
+	<script>
+    	alert('{{messages[-1]}}')   //이 부분이 중요
+	</script>
+	{% endif %}
+{% endwith %}
 </head>
 <body>
 
