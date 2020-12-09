@@ -12,6 +12,8 @@
         padding: 25px;
     }
 </style>
+
+
 {% endblock %}
 
 
@@ -27,6 +29,24 @@
 {% endblock %}
 
 {% block content %}
+<script>
+    function editCard(id){
+            let card_src = $('#'+id).data("src");
+            let card_desc = $('#'+id).data("desc");
+
+            let temp_html = `
+            <div class="card">
+                <img class="card-img-top" src="${card_src}">
+                <div class="card-body">
+                     <input type="file" class="control-file" name="new_attachfile" id="new_attachfile">
+                    <input type="text" class="card-text" name="new_desc" id="new_desc" value="${card_desc}">
+                    <button class="my-2 btn btn-primary btn-sm" onclick='editCardSave(${id})'>저장</button>
+            </div>
+            `
+            $('#'+id).html(temp_html);
+    }
+</script>
+
           <div class="card" style="width: 18rem;">
               <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
                 <input type="file" class="control-file" name="attachfile" id="attachfile">
@@ -39,12 +59,14 @@
 
     <div class="card-columns">
         {% for result in results %}
-            <div class="card">
+            <div id="{{result._id}}" class="card" data-src="../../images/{{result.attachfile}}" data-desc='{{result.desc}}'>
                 <img class="card-img-top" src="../../images/{{result.attachfile}}">
                 <div class="card-body">
-                <div class="card-name">{{result.name }}</div>
-                <div class="card-date">{{result.created}}</div>
-                <p class="card-desc">{{result.desc}}</p>
+
+                    <div class="card-name" data-name="{{result.name}}">{{result.name }}</div>
+                    <div class="card-date" data-date="{{result.created}}">{{result.created}}</div>
+                    <p class="card-desc">{{result.desc}}</p>
+                    <button onclick='editCard("{{result._id}}")' class="btn btn-primary">수정</button>
                 </div>
             </div>
         {% endfor %}

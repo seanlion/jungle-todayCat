@@ -1,45 +1,81 @@
 {% extends "main.html" %}
 
+{% block head %}
+
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".delete").on('click', function() {  // 클래스값이 delete인 엘리먼트가 눌리면?
+        if(confirm("정말로 삭제하시겠습니까?")) {  // 확인 창이 열림
+            location.href = $(this).data('uri');  // data-uri 속성값으로 URL 호출
+        }
+    });
+});
+</script>
+
+{% endblock %}
+
+
 {% block content %}
 <h3>my page</h3>
 <!--업로드 영역-->
 <div class="row row-cols-md-3 my-3">
-      <div class="form-group col mx-3 mb-4">
-          <div class="card" style="width: 18rem;">
-              <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
+    <div class="form-group col mx-3 mb-4">
+        <div class="card" style="width: 18rem;">
+            <form method="post" action="{{url_for('write')}}" enctype="multipart/form-data">
                 <input type="file" class="control-file" name="attachfile" id="attachfile">
                 <div class="card-body">
                     <input type="text" class="card-text" name="desc" id="desc">
                     <button type="submit" class="btn btn-primary">업로드</button>
                 </div>
-              </form>
-          </div>
-      </div>
+            </form>
+        </div>
+    </div>
 
     <!--콘텐츠 영역 -->
+
+    <div class="card-columns">
+        {% for result in results %}
+        <div class="card">
+            <img class="card-img-top" src="../../images/{{result.attachfile}}">
+            <div class="card-body">
+                <div class="card-name">{{result.name }}</div>
+                <div class="card-date">{{result.created}}</div>
+                <p class="card-desc">{{result.desc}}</p>
+
+                <a href="#" class="delete btn btn-sm btn-outline-secondary"
+                   data-uri="{{ url_for('.delete') }}">삭제</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
     <div class="col mb-4 mx-3 card" style="width: 18rem;">
-      <img src=".." class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+        <img src=".." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
     </div>
-     <div class="col mb-4 mx-3 card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+    <div class="col mb-4 mx-3 card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
     </div>
-     <div class="col mb-4 mx-3 card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+    <div class="col mb-4 mx-3 card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
     </div>
-     <div class="col mb-4 mx-3 card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+    <div class="col mb-4 mx-3 card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
     </div>
 </div>
 

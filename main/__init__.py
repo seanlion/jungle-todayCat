@@ -11,11 +11,7 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
 mongo = PyMongo(app)
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-BOARD_IMAGE_PATH = "/Users/colapa/jungle/jungle-todayCat/images"
+BOARD_IMAGE_PATH = "/Users/seung/Desktop/backend/todaycat/images"
 ALLOWED_EXTENSIONS = set(['png','pdf','jpg', 'jpeg','gif'])
 # 이미지 경로에 쉽게 접근하기 위해 환경 변수 생성
 app.config["BOARD_IMAGE_PATH"] = BOARD_IMAGE_PATH
@@ -27,4 +23,4 @@ if not os.path.exists(app.config["BOARD_IMAGE_PATH"]):
 
 from . import make
 from . import main
-
+from . import delete
