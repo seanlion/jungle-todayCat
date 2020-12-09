@@ -3,24 +3,24 @@
 {% block content %}
     <form>
         <div class="mb-3">
-            <label for="emailText" class="form-label">이메일 주소를 입력하세요.</label>
-            <input type="email" class="form-control" id="emailText" placeholder="name@example.com">
+            <label for="emailText" class="form-label">이메일 입력</label>
+            <input type="email" class="form-control" name="emailText" id="emailText" placeholder="name@example.com">
         </div>
         <div class="mb-3 row">
-            <label for="password1" class="col-sm-2 col-form-label">패스워드를 입력하세요.</label>
+            <label for="password1" class="col-sm-2 col-form-label">비밀번호 입</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="password1">
+                <input type="password" class="form-control" name="password1" id="password1">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="password2" class="col-sm-2 col-form-label">패스워드를 다시 한번 입력하세요.</label>
+            <label for="password2" class="col-sm-2 col-form-label">비밀번호 확인</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="password2">
+                <input type="password" class="form-control" name="password2" id="password2">
             </div>
         </div>
         <div class="mb-3">
             <label for="nameTextarea" class="form-label">이름을 적어주세요.</label>
-            <textarea class="form-control" id="nameTextarea" rows="1"></textarea>
+            <textarea class="form-control" name="nameTextarea" id="nameTextarea" rows="1"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" onclick="compareId()">가입하기</button>
     </form>

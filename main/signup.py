@@ -16,6 +16,6 @@ def register():
     password_receive = request.form["password_give"]
     password_hash = bcrypt.generate_password_hash(password_receive)
     name_receive = request.form["name_give"]
-    doc = {"email": email_receive, "password": password_hash, "name": name_receive}
-    mongo.db.users.insert_one(doc)
+    user = {"email": email_receive, "password": password_hash, "name": name_receive}
+    mongo.db.users.insert_one(user)
     return jsonify({"result": "success"})

@@ -1,19 +1,15 @@
 from main import *
 from string import digits, ascii_uppercase, ascii_lowercase
 
-@app.route('/write', methods=["POST"])
+@app.route('/get', methods=["GET","POST"])
 def write():
     if request.method == "POST":
         desc = request.form.get("desc")
         created = datetime.now(timezone.utc)
-        print("created:", created)
         filename = None
-        for k in request.files:
-            print("file test", k)
         # form에서 넘어온 파일이 있냐를 체크해야함.(name의 값을 이용)
         if "attachfile" in request.files:
             file = request.files["attachfile"]
-            print("file:",file)
             # 원본 filename이 제대로 된 파일이름(확장자)을 가졌는지 확인
             if file and allowed_file(file.filename):
                 # 새로운 파일네임을 만드는 함수를 실행시킴.
@@ -22,39 +18,19 @@ def write():
 
         contents = mongo.db.contents
         post = {
-            "desc" : desc,
-            "created" : created,
+            "desc": desc,
+            "created": created,
             "attachfile": filename,
-            "writer_id" : session.get("id")
+            "writer_id": session.get("id")
         }
 
         x = contents.insert_one(post)
-        return redirect(url_for('write',idx=x.inserted_id))
-
-        # return redirect(request.url)
-    else:
+        results = list(contents.find({}))
+        return render_template('home.html',results=results)
+    else :
         contents = mongo.db.contents
-        # data = contents.find_one({"_id": ObjectId(idx)})
-        # print("data:", data)
-        # result = {
-        #     "id": data.get("_id"),
-        #     "desc": data.get("desc"),
-        #     "writer_id": data.get("writer_id", ""),
-        #     "attachfile": data.get("attachfile", "")
-        # }
-
-        return render_template("mypage.html")
-
-@app.route("/upload_image", methods=["POST"])
-def upload_image():
-    if request.method == "POST":
-        # write.html의 uploadImage 함수 내용 중 image 인자를 image라는 이름으로 append함. 여기서 image가 그 image.
-        file = request.files["image"]
-        if file and allowed_file(file.filename):
-          filename = "{}.jpg".format(random_generator())
-          savefilepath = os.path.join(app.config["BOARD_IMAGE_PATH"], filename)
-          file.save(savefilepath)
-          return url_for("board.board_images", filename=filename)
+        results = list(contents.find({}))
+        return render_template('home.html', results=results)
 
 @app.route("/images/<filename>")
 def uploaded_file(filename):
