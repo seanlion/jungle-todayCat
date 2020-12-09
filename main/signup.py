@@ -1,9 +1,4 @@
 from main import *
-from flask_bcrypt import Bcrypt
-
-app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
-mongo = PyMongo(app)
-bcrypt = Bcrypt(app)
 
 @app.route('/signup')
 def registerPage():

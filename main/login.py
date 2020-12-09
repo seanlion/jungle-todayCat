@@ -12,8 +12,8 @@ def loginPage():
 def login():
     email = request.form.get("loginEmail")
     password = request.form.get("password")
-    # db에 일치하는 이메일이 있는지 확인하고 user에 저
-    user = mongo.db.users.find_one({"email": email})장
+    # db에 일치하는 이메일이 있는지 확인하고 user에 저장
+    user = mongo.db.users.find_one({"email": email})
     # user가 None이라면 db에 일치하는 이메일이 없는것.
     if user is not None:
         # db에 저장되어있는 비밀번호 user_password 변수에 저장
