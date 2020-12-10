@@ -1,9 +1,5 @@
 from main import *
 
-app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
-mongo = PyMongo(app)
-bcrypt = Bcrypt(app)
-
 @app.route('/login', methods=["POST","GET"])
 def login():
     if request.method =="POST":
@@ -18,12 +14,10 @@ def login():
             print("email ok")
         else:
 
-            flash("이메일이 일치하지 않습니다.")
+            flash("등록되지 않은 이메일입니다.")
             print("not email")
             return redirect(url_for("login"))
 
-        login_data = {'id':email, 'pass':password}
-        login_url = "http://localhost:5000/login"
         # db에서 가져온 비밀번호는 해쉬화되어 있기 때문에 새로 가져온 비밀번호를 해쉬화해서 check_password_hash 메서드로 비교(True, False 반환)
         if bcrypt.check_password_hash(user_password, password):
             session.clear

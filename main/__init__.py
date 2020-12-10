@@ -6,7 +6,9 @@ import os,re, time,math,requests, random
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+# app.config["MONGO_URI"] = "mongodb://jungle:jungle@3.35.207.236:27017/myDatabase?authSource=admin"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
+
 mongo = PyMongo(app)
 
 bcrypt = Bcrypt(app)

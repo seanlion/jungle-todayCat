@@ -108,7 +108,7 @@
     {% if block_start - 1 > 0 %}
     <!-- li태그랑 클래스 추가 -->
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write', page=block_start -1)}}">[이전]</a>
+                             href="{{url_for('index', page=block_start -1)}}">[이전]</a>
     </li>
     {% endif %}
     <!-- 페이지네이션을 위한 코드 작성 -->
@@ -126,7 +126,7 @@
     <!-- ?page=i 형태로 쿼리스트링을 가진 url로 이동할 수 있다. -->
     <!-- 검색기능 때문에 코드 추가 : 여기 코드 수정을 안하면 페이지가 이동될때마다 검색유형,검색어 관한 쿼리스트링이 포함되지않기 때문에 검색결과가 풀린다. 그래서 쿼리스트링으로 검색유형,검색어를 같이 넘겨줘야 한다. -->
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write', page=i)}}">{{ i
+                             href="{{url_for('index', page=i)}}">{{ i
         }}</a></li>
     {% endif %}
     {% endif %}
@@ -134,7 +134,7 @@
     <!-- 후속으로 코드추가 :여기도 검색기능 관련해서 쿼리스트링을 추가해야 함. -->
     {% if block_last < last_page_num %}
     <li class="page-item"><a class="page-link"
-                             href="{{url_for('write',page=block_last + 1 )}}">[다음]</a>
+                             href="{{url_for('index',page=block_last + 1 )}}">[다음]</a>
     </li>
     {% endif %}
 </ul>

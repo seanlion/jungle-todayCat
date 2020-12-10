@@ -4,12 +4,11 @@ from string import digits, ascii_uppercase, ascii_lowercase
 
 @app.route('/edit', methods=["POST"])
 def edit_content():
-    desc = request.form.get("desc")
+    desc = request.form.get("new_desc")
     id = request.form.get("id")
     # updated = datetime.now(timezone.utc)
     filename = None
     print("desc:", desc)
-    print("file_data:", request.files["new_attachfile"])
     file = request.files["new_attachfile"]
     if file and allowed_file(file.filename):
         filename = check_filename(file.filename)
@@ -32,9 +31,8 @@ def write():
     contents = mongo.db.contents
     print(session.get('id'))
     if session.get('id') is None or session.get('id') == "":
-        # connection reset 에러 해결. 발표 때 얘기하기
+        # connection reset 에러 해결.
         request.files.getlist('file')
-
         flash("로그인해주세요.")
         return redirect(url_for('login'))
     else:
@@ -85,16 +83,11 @@ def index():
 def random_photo():
     files = os.listdir(BOARD_IMAGE_PATH)
     d = random.choice(files)
-    print("random_photo:", d)
     return url_for('uploaded_file', filename=d)
 
 
 @app.route("/images/<filename>")
 def uploaded_file(filename):
-    print("uploaded file 함수 접속.")
-    # WYSWIG 강의의 28분 구간을 참조.
-    result = send_from_directory(app.config["BOARD_IMAGE_PATH"], filename)
-    print("result:", result)
     return send_from_directory(app.config["BOARD_IMAGE_PATH"], filename)
 
 
